@@ -1,0 +1,24 @@
+{
+  "name": "h1we080124-dsi-nodeseq",
+  "version": "1.0.0",
+  "description": "MySQL based API build in Node.js, Express and Sequelize",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Webudvikler-TechCollege/H1WE080124-DSI-NodeSeq.git"
+  },
+  "author": "Heinz K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Webudvikler-TechCollege/H1WE080124-DSI-NodeSeq/issues"
+  },
+  "homepage": "https://github.com/Webudvikler-TechCollege/H1WE080124-DSI-NodeSeq#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
