@@ -1,7 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import sequelize from './config/sequelizeConfig.js'
+import dbConfig from './config/dbConfig.js'
 import carModel from './models/carModel.js'
+import { dbController } from './controllers/dbController.js'
+import { carController } from './controllers/carController.js'
 
 dotenv.config()
 const app = express()
@@ -9,22 +11,10 @@ const app = express()
 const port = process.env.PORT || 4000
 
 app.get('/', async (req, res) => {
-    try {
-        await sequelize.authenticate()
-        res.send('Connection success')
-    } catch (error) {
-        res.send(error)        
-    }
+    res.send('Velkommen til bilbasen')
 })
 
-app.get('/sync', async (req, res) => {
-    try {
-        await sequelize.sync({ force: true })
-        res.send('Synchronize success')
-    } catch (error) {
-        res.send(error)        
-    }
-})
+app.use(dbController, carController)
 
 app.get('*', (req, res) => {
     res.status(200).json({ 

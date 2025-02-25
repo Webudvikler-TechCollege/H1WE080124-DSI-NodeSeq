@@ -1,4 +1,4 @@
-import sequelize from '../config/sequelizeConfig.js'
+import dbConfig from '../config/dbConfig.js'
 import { DataTypes, Model } from 'sequelize'
 
 export default class carModel extends Model{}
@@ -19,7 +19,7 @@ carModel.init({
         allowNull: false
     }
 },{
-    sequelize,
+    sequelize: dbConfig,
     modelName: 'car',
     underscored: true
 })
