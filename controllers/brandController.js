@@ -1,17 +1,17 @@
 import express from 'express'
-import carModel from '../models/carModel.js';
-export const carController = express.Router()
+import brandModel from '../models/brandModel.js'
 
-carController.get('/cars', async (req, res) => {
+export const brandController = express.Router()
+
+brandController.get('/brands', async (req, res) => {
     try {
-        const result = await carModel.findAll()        
-        res.send(result)        
+        res.send('List of records')        
     } catch (error) {
         res.send(`Get records: ${error}`)           
     }
 })
 
-carController.get('/cars/:id([0-9]+)', async (req, res) => {
+brandController.get('/brands/:id([0-9]+)', async (req, res) => {
     try {
         const { id } = req.params;
         res.send(`Get details for record #${id}`)
@@ -20,16 +20,15 @@ carController.get('/cars/:id([0-9]+)', async (req, res) => {
     }    
 })
 
-carController.post('/cars', async (req, res) => {    
+brandController.post('/brands', async (req, res) => {
     try {
-        const result = await carModel.create(req.body)
-        res.status(201).send(`Record created successfully`)
+        res.send(`Create record`)
     } catch (error) {
-        res.status(500).send(`Fail to create record: ${error}`)   
+        res.send(`Fail to create record: ${error}`)   
     }    
 })
 
-carController.put('/cars/:id([0-9]+)', async (req, res) => {
+brandController.put('/brands/:id([0-9]+)', async (req, res) => {
     try {
         const { id } = req.params;
         res.send(`Update record: ID#${id}`)
@@ -38,7 +37,7 @@ carController.put('/cars/:id([0-9]+)', async (req, res) => {
     }    
 })
 
-carController.delete('/cars/:id([0-9]+)', async (req, res) => {
+brandController.delete('/brands/:id([0-9]+)', async (req, res) => {
     try {
         const { id } = req.params;
         res.send(`Delete record: ID#${id}`)

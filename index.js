@@ -1,12 +1,13 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import dbConfig from './config/dbConfig.js'
-import carModel from './models/carModel.js'
 import { dbController } from './controllers/dbController.js'
 import { carController } from './controllers/carController.js'
+import { brandController } from './controllers/brandController.js'
+import { categoryController } from './controllers/categoryController.js'
 
 dotenv.config()
 const app = express()
+app.use(express.urlencoded({ extended: true }))
 
 const port = process.env.PORT || 4000
 
@@ -14,7 +15,12 @@ app.get('/', async (req, res) => {
     res.send('Velkommen til bilbasen')
 })
 
-app.use(dbController, carController)
+app.use(
+    carController,
+    categoryController,
+    brandController,
+    dbController
+)
 
 app.get('*', (req, res) => {
     res.status(200).json({ 
