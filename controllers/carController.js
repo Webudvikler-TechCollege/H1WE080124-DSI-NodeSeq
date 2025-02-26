@@ -1,48 +1,47 @@
 import express from 'express'
-import carModel from '../models/carModel.js';
+import carModel from '../models/carModel.js'
 export const carController = express.Router()
 
+// Route to list (READ)
 carController.get('/cars', async (req, res) => {
     try {
-        const result = await carModel.findAll()        
-        res.send(result)        
+        const data = await carModel.findAll({
+            attributes: ['id', 'brand']
+        })
+
+        if(!data || data.length === 0) {
+            return res.json({ 
+                message: 'No data found'
+            })
+        }
+
+        res.json(data)
     } catch (error) {
-        res.send(`Get records: ${error}`)           
+        console.error(`Could not get car list: ${error}`)
     }
 })
 
+// Route to details (READ)
 carController.get('/cars/:id([0-9]+)', async (req, res) => {
     try {
-        const { id } = req.params;
-        res.send(`Get details for record #${id}`)
-    } catch (error) {
-        res.send(`Fail to get details: ${error}`)   
-    }    
-})
+        const { id, hest } = req.params
+        const data = await carModel.findOne({
+            attributes: ['id', 'brand', 'year'],
+            where: {
+                id: id
+            }
+        })
 
-carController.post('/cars', async (req, res) => {    
-    try {
-        const result = await carModel.create(req.body)
-        res.status(201).send(`Record created successfully`)
-    } catch (error) {
-        res.status(500).send(`Fail to create record: ${error}`)   
-    }    
-})
+        if(!data) {
+            return res.json({ 
+                message: 'No data found'
+            })
+        }
 
-carController.put('/cars/:id([0-9]+)', async (req, res) => {
-    try {
-        const { id } = req.params;
-        res.send(`Update record: ID#${id}`)
-    } catch (error) {
-        res.send(`Fail to update record: ${error}`)   
-    }    
-})
+        res.json(data)
 
-carController.delete('/cars/:id([0-9]+)', async (req, res) => {
-    try {
-        const { id } = req.params;
-        res.send(`Delete record: ID#${id}`)
     } catch (error) {
-        res.send(`Fail to update record: ${error}`)   
-    }    
+        console.error(`Could not get car details: ${error}`)        
+    }
+    
 })
