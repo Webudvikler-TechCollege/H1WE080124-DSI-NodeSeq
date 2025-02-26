@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import { dbController } from './controllers/dbController.js'
 import { carController } from './controllers/carController.js'
+import { brandController } from './controllers/brandController.js'
 
 // Dotenv access
 dotenv.config()
@@ -19,6 +20,7 @@ app.get('/', async (req, res) => {
 // Controller routes
 app.use(
     carController,
+    brandController,
     dbController
 )
 
