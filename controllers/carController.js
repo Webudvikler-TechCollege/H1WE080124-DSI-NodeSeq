@@ -45,6 +45,7 @@ carController.get('/cars/:id([0-9]+)', async (req, res) => {
     }
 })
 
+// Route to create (CREATE)
 carController.post('/cars', async (req, res) => {
     try {
         const data = await carModel.create(req.body)
@@ -58,6 +59,7 @@ carController.post('/cars', async (req, res) => {
     }
 })
 
+// Route to update (UPDATE)
 carController.put('/cars/:id([0-9]+)', async (req, res) => {
     try {
         const { id } = req.params
@@ -79,6 +81,7 @@ carController.put('/cars/:id([0-9]+)', async (req, res) => {
     }
 })
 
+// Route to delete (DELETE)
 carController.delete('/cars/:id([0-9]+)', async (req, res) => {
     try {
         const { id } = req.params
