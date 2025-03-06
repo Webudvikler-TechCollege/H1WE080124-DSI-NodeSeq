@@ -1,6 +1,7 @@
 import dbConfig from '../config/dbConfig.js'
 import { DataTypes, Model } from 'sequelize'
 import brandModel from './brandModel.js'
+import categoryModel from './categoryModel.js'
 
 export default class carModel extends Model{}
 
@@ -20,6 +21,14 @@ carModel.init({
         allowNull: false,
         references: {
             model: brandModel,
+            key: 'id'
+        }
+    },
+    category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: categoryModel,
             key: 'id'
         }
     },

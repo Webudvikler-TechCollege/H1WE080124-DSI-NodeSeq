@@ -4,6 +4,7 @@ import { dbController } from './controllers/dbController.js'
 import { carController } from './controllers/carController.js'
 import { brandController } from './controllers/brandController.js'
 import { setRelations } from './models/relations.js'
+import { categoryController } from './controllers/categoryController.js'
 
 // Dotenv access
 dotenv.config()
@@ -12,6 +13,7 @@ dotenv.config()
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 const port = process.env.PORT || 4000
+
 setRelations()
 
 // Root route
@@ -23,6 +25,7 @@ app.get('/', async (req, res) => {
 app.use(
     carController,
     brandController,
+    categoryController,
     dbController
 )
 

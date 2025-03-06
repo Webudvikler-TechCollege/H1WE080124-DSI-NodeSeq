@@ -1,6 +1,7 @@
 import express from 'express'
 import carModel from '../models/carModel.js'
 import brandModel from '../models/brandModel.js'
+import categoryModel from '../models/categoryModel.js'
 export const carController = express.Router()
 
 // Route to list (READ)
@@ -34,10 +35,16 @@ carController.get('/cars/:id([0-9]+)', async (req, res) => {
             where: {
                 id: id
             },
-            include: {
-                model: brandModel,
-                attributes: ['title']
-            }
+            include: [
+                {
+                    model: brandModel,
+                    attributes: ['title']
+                },
+                {
+                    model: categoryModel,
+                    attributes: ['title']
+                }
+            ]
         })
 
         if(!data) {
